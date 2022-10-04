@@ -1,6 +1,6 @@
 require_dependency 'account_controller'
 
-module Redmine::OmniAuthSAML
+module RedmineOmniAuthSaml
   module AccountControllerPatch
     def self.included(base)
       base.class_eval do
@@ -166,19 +166,19 @@ module Redmine::OmniAuthSAML
     end
 
     def name_identifier_value
-      User.current.send Redmine::OmniAuthSAML.configured_saml[:name_identifier_value].to_sym
+      User.current.send RedmineOmniAuthSaml.configured_saml[:name_identifier_value].to_sym
     end
 
     def saml_settings
-      Redmine::OmniAuthSAML.settings_hash
+      RedmineOmniAuthSaml.settings_hash
     end
 
     def omniauth_saml_settings
-      Redmine::OmniAuthSAML.configured_saml
+      RedmineOmniAuthSaml.configured_saml
     end
 
     def saml_logout_url(service = nil)
-      logout_uri = Redmine::OmniAuthSAML.configured_saml[:signout_url]
+      logout_uri = RedmineOmniAuthSaml.configured_saml[:signout_url]
       logout_uri += service.to_s unless logout_uri.blank?
       logout_uri || home_url
     end
@@ -186,7 +186,7 @@ module Redmine::OmniAuthSAML
   end
 end
 
-unless AccountController.included_modules.include? Redmine::OmniAuthSAML::AccountControllerPatch
-  AccountController.prepend(Redmine::OmniAuthSAML::AccountControllerPatch)
+unless AccountController.included_modules.include? RedmineOmniAuthSaml::AccountControllerPatch
+  AccountController.prepend(RedmineOmniAuthSaml::AccountControllerPatch)
   AccountController.before_action :verify_authenticity_token, :except => [:login_with_saml_callback]
 end

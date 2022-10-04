@@ -1,6 +1,6 @@
 require_dependency 'user'
 
-module OmniAuthSamlUser
+module RedmineOmniAuthSaml::UserPatch
   def self.prepended(base)
     class << base
       self.prepend(OmniAuthSamlUserMethods)
@@ -35,4 +35,4 @@ module OmniAuthSamlUser
 
 end
 
-User.prepend(OmniAuthSamlUser)
+User.prepend(RedmineOmniAuthSaml::UserPatch)
