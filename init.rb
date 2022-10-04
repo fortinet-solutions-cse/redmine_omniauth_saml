@@ -1,13 +1,13 @@
 require 'redmine'
-require 'redmine_omniauth_saml'
-require 'redmine_omniauth_saml/hooks'
-require 'redmine_omniauth_saml/user_patch'
+require File.expand_path('lib/redmine_omni_auth_saml.rb', __dir__)
+require File.expand_path('lib/redmine_omni_auth_saml/hooks.rb', __dir__)
+require File.expand_path('lib/redmine_omni_auth_saml/user_patch.rb', __dir__)
 
 
 # Patches to existing classes/modules
 ActiveSupport::Reloader.to_prepare do
-  require_dependency 'redmine_omniauth_saml/account_helper_patch'
-  require_dependency 'redmine_omniauth_saml/account_controller_patch'
+  require_dependency 'redmine_omni_auth_saml/account_helper_patch'
+  require_dependency 'redmine_omni_auth_saml/account_controller_patch'
 end
 
 # Plugin generic informations

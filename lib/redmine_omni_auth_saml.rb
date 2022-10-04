@@ -1,4 +1,5 @@
-module Redmine::OmniAuthSAML
+
+module RedmineOmniAuthSaml
   class << self
 
     def settings_hash
